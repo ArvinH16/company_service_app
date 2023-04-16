@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_bar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sign_in.css') }}">
+
+</head>
+<body>
+    <nav>
+        <!-- <div id="nav_list">
+            <h1>Service feedback</h1>
+            <p>Home</p>
+            <p>Already a member? <a href="">Sign in</a></p>
+        </div> -->
+        <h1 id="title">Service feedback</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sign_in_page">Sign in</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <form action="/login" method="post">
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p> {{message}} </p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <label for="email">Email:</label>
+            <input type="text" name="email" placeholder="Type in your email here">
+
+            <label for="password">Password</label>
+            <input type="text" name="email" placeholder="Type in your password here">
+
+            <label for="company">Login as company</label>
+            <input type="radio" name="role" value="company" id="company">
+            <label for="client">Login as client</label>
+            <input type="radio" name="role" value="client" id="client">
+            
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

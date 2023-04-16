@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_bar.css') }}">
+
+</head>
+
+<body>
+    <nav>
+        <!-- <div id="nav_list">
+            <h1>Service feedback</h1>
+            <p>Home</p>
+            <p>Already a member? <a href="">Sign in</a></p>
+        </div> -->
+        <h1 id="title">Service feedback</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sign_in_page">Sign in</a></li>
+        </ul>
+    </nav>
+    <div>
+        <div>
+
+        </div>
+        <div class="main_body">
+            <div>
+                <p>If you are currently using a service offered by a company:</p>
+                <button><a id="btn" href="/company_signup_page">Company sign up</a></button>
+            </div>
+            <div>
+                <p>If you are a company that offers services</p>
+                <button><a id="btn" href="/client_signup_page">Client sign up</a></button>
+            </div>            
+        </div>
+    </div>
+</body>
+
+</html>

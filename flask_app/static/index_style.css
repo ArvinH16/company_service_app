@@ -1,0 +1,18 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+/* The body */
+.main_body {
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#btn {
+    text-decoration: none;
+    color: black;
+}
