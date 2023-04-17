@@ -24,8 +24,8 @@
     </nav>
 
     <div>
-        <form action="/login" method="post">
-            {% with messages = get_flashed_messages(category_filter=['login']) %}
+        <form action="/sign_in" method="post">
+            {% with messages = get_flashed_messages(category_filter=['sign_in']) %}
                 {% if messages %}
                     {% for message in messages %}
                     <p> {{message}} </p>
@@ -36,14 +36,19 @@
             <input type="text" name="email" placeholder="Type in your email here">
 
             <label for="password">Password</label>
-            <input type="text" name="email" placeholder="Type in your password here">
+            <input type="text" name="password" placeholder="Type in your password here">
+
+            <!-- hidden input to send in a value of null if 
+            neither radio input is selected for validation purposes-->
 
             <label for="company">Login as company</label>
             <input type="radio" name="role" value="company" id="company">
+
             <label for="client">Login as client</label>
             <input type="radio" name="role" value="client" id="client">
-            
 
+            <input type="hidden" name="role" value="null">
+            
             <input type="submit" value="Submit">
         </form>
     </div>

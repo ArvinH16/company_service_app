@@ -7,8 +7,8 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 class Client:
     def __init__(self, data):
         self.id = data['id']
-        self.first_name = data['firstName']
-        self.last_name = data['lastName']
+        self.first_name = data['first_name']
+        self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
 
@@ -21,6 +21,21 @@ class Client:
         result = connectToMySQL('services').query_db(query, data)
         return result
 
+    
+    @classmethod
+    def check_email(cls, data):
+        query = "SELECT * FROM clients WHERE email = %(email)s"
+        result = connectToMySQL('services').query_db(query, data)
+        if len(result) < 1:
+            return False
+        
+        return cls(result[0])
+
+    @classmethod 
+    def get_client(cls, data):
+        query = "SELECT * FROM clients WHERE id = %(id)s"
+        result = connectToMySQL('services').query_db(query, data)
+        return cls(result[0])
 
     @staticmethod
     def validation_registering(data):
@@ -63,11 +78,11 @@ class Client:
         is_valid = True
 
         if len(data['password']) < 1:
-            flash("pasword fiekd is required", 'login')
+            flash("pasword fied is required", 'sign_in')
             is_valid = False
 
         if not EMAIL_REGEX.match(data['email']):
-            flash("Invalid email. Please enter a valid email", 'login')
+            flash("Invalid email. Please enter a valid email", 'sign_in')
             is_valid = False
 
         return is_valid

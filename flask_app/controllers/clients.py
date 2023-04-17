@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.client import Client
+from flask_app.models.report import Report
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -23,5 +24,20 @@ def create_client():
     }
 
     clientAdded = Client.create_client(data)
+    session['user_id'] = company.id
 
     return(redirect('/'))
+
+@app.route('/client_dashboard')
+def client_dashboard():
+    if 'user_id' not in session:
+        return redirect('/')
+    
+    data = {
+        'id' : session['user_id']
+    }
+
+    client = Client.get_client(data)
+    reports = Report.get_this_client_reports()
+
+    return render_template('client_dashboard.html', reports = reports, client = client)

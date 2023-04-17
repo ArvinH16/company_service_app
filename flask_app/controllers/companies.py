@@ -25,3 +25,7 @@ def create_company():
 
     return(redirect('/'))
 
+@app.route('/company_dashboard')
+def company_dashboard():
+    return render_template('company_dashboard.html')
+

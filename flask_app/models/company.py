@@ -23,7 +23,14 @@ class Company:
         result = connectToMySQL('services').query_db(query, data)
         return result
 
-
+    @classmethod
+    def check_email(cls, data):
+        query = "SELECT * FROM companies WHERE email = %(email)s"
+        result = connectToMySQL('services').query_db(query, data)
+        if len(result) < 1:
+            return False
+        
+        return cls(result[0])
 
     @staticmethod
     def validation_registering(data):
@@ -62,11 +69,11 @@ class Company:
         is_valid = True
 
         if len(data['password']) < 1:
-            flash("pasword fiekd is required", 'login')
+            flash("pasword field is required", 'sign_in')
             is_valid = False
 
         if not EMAIL_REGEX.match(data['email']):
-            flash("Invalid email. Please enter a valid email", 'login')
+            flash("Invalid email. Please enter a valid email", 'sign_in')
             is_valid = False
 
         return is_valid
