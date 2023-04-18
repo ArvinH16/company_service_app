@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_bar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_body.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='client_signUp.css') }}">
 
 </head>
@@ -22,30 +22,33 @@
             <li><a href="/sign_in_page">Sign in</a></li>
         </ul>
     </nav>
-    <form action="/client_signup" method="post">
-        {% with messages = get_flashed_messages(category_filter=['client_register']) %}
-            {% if messages %}
-                {% for message in messages %}
-                <p> {{message}} </p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <label for="email">Email:</label>
-        <input type="text" name="email" placeholder="Type your email here...">
-
-        <label for="password">Create a password</label>
-        <input type="text" name="password" placeholder="Type your password here">
-
-        <label for="confirm_pass">Confirm password</label>
-        <input type="text" name="confirm_pass" placeholder="Re-write your password here">
-
-        <label for="first_name">First Name</label>
-        <input type="text" name="first_name" placeholder="Type your first name here...">
-
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" placeholder="Type your last name here...">
-
-        <input type="submit" value="Sign up!">
-    </form>
+    <div class="main_body">
+        <form action="/client_signup" method="post">
+            {% with messages = get_flashed_messages(category_filter=['client_register']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p> {{message}} </p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <label id="inline" for="email">Email:</label>
+            <input id="inline" type="text" name="email" placeholder="Type your email here...">
+    
+            <label id="inline" for="password">Create a password</label>
+            <input id="inline" type="text" name="password" placeholder="Type your password here">
+    
+            <label id="inline" for="confirm_pass">Confirm password</label>
+            <input id="inline" type="text" name="confirm_pass" placeholder="Re-write your password here">
+    
+            <label id="inline" for="first_name">First Name</label>
+            <input id="inline" type="text" name="first_name" placeholder="Type your first name here...">
+    
+            <label id="inline" for="last_name">Last Name</label>
+            <input id="inline" type="text" name="last_name" placeholder="Type your last name here...">
+    
+            <input id="inline" type="submit" value="Sign up!">
+        </form>
+    </div>
+    
 </body>
 </html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company sign up page</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='company_signUp_style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_bar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_body.css') }}">
 
 </head>
 <body>
@@ -22,27 +22,29 @@
             <li><a href="/sign_in_page">Sign in</a></li>
         </ul>
     </nav>
-    <form action="/company_signup" method="post">
-        {% with messages = get_flashed_messages(category_filter=['company_register']) %}
-            {% if messages %}
-                {% for message in messages %}
-                <p> {{message}} </p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <label for="email">Email:</label>
-        <input type="text" name="email" placeholder="Type your email here...">
-
-        <label for="password">Create a password</label>
-        <input type="text" name="password" placeholder="Type your password here">
-
-        <label for="confirm_pass">Confirm password</label>
-        <input type="text" name="confirm_pass" placeholder="Re-write your password here">
-
-        <label for="company_name">Company Name</label>
-        <input type="text" name="company_name" placeholder="Type your company name here...">
-
-        <input type="submit" value="Sign up!">
-    </form>
+    <div class="main_body">
+        <form action="/company_signup" method="post">
+            {% with messages = get_flashed_messages(category_filter=['company_register']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p> {{message}} </p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <label id="inline" for="email">Email:</label>
+            <input id="inline" type="text" name="email" placeholder="Type your email here...">
+    
+            <label id="inline" for="password">Create a password</label>
+            <input id="inline" type="text" name="password" placeholder="Type your password here">
+    
+            <label id="inline" for="confirm_pass">Confirm password</label>
+            <input type="text" name="confirm_pass" placeholder="Re-write your password here">
+    
+            <label id="inline" for="company_name">Company Name</label>
+            <input id="inline" type="text" name="company_name" placeholder="Type your company name here...">
+    
+            <input id="inline" type="submit" value="Sign up!">
+        </form>
+    </div>
 </body>
 </html>

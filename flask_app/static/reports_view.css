@@ -1,3 +1,26 @@
 #each_row {
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    margin-top: 3px;
+    margin-bottom: 3px;
+    /* margin-left: 5px; */
+    /* margin-right: 5px; */
+    border: 1px solid black;
     display: flex;
+}
+
+
+#left_col {
+    flex: 1;
+}
+
+#center_col {
+    flex: 3;
+}
+
+#right_col {
+    flex: 1;
 }

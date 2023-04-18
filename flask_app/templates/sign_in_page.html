@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_bar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_body.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sign_in.css') }}">
 
 </head>
@@ -23,7 +23,7 @@
         </ul>
     </nav>
 
-    <div>
+    <div class="main_body">
         <form action="/sign_in" method="post">
             {% with messages = get_flashed_messages(category_filter=['sign_in']) %}
                 {% if messages %}
@@ -32,11 +32,11 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <label for="email">Email:</label>
-            <input type="text" name="email" placeholder="Type in your email here">
+            <label id="inline" for="email">Email:</label>
+            <input id="inline" type="text" name="email" placeholder="Type in your email here">
 
-            <label for="password">Password</label>
-            <input type="text" name="password" placeholder="Type in your password here">
+            <label id="inline" for="password">Password</label>
+            <input id="inline"type="text" name="password" placeholder="Type in your password here">
 
             <!-- hidden input to send in a value of null if 
             neither radio input is selected for validation purposes-->
@@ -49,7 +49,7 @@
 
             <input type="hidden" name="role" value="null">
             
-            <input type="submit" value="Submit">
+            <input id="inline" type="submit" value="Submit">
         </form>
     </div>
 </body>

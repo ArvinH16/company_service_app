@@ -1,18 +1,31 @@
 * {
     padding: 0px;
     margin: 0px;
+    /* background-color: darkslategrey; */
 }
 
 
 
 /* The body */
-.main_body {
+.main_body_inner {
     padding-top: 50px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 #btn {
     text-decoration: none;
     color: black;
+}
+
+#left_col {
+    border: 2px solid black;
+    padding: 5px;
+    width: 350px;
+}
+
+#right_col {
+    border: 2px solid black;
+    padding: 5px;
+    width: 350px;
 }
