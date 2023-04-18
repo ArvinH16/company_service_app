@@ -32,6 +32,34 @@ class Company:
             return False
         
         return cls(result[0])
+    
+    @classmethod
+    def get_company(cls, data):
+        query = "SELECT * FROM companies WHERE id = %(id)s"
+        result = connectToMySQL('services_reports').query_db(query, data)
+        return cls(result[0])
+
+    @classmethod
+    def get_all_companies(cls):
+        query = "SELECT * FROM companies"
+        result = connectToMySQL('services_reports').query_db(query)
+        return result
+
+    #This method is repetitive can be taken out
+    @classmethod
+    def get_all_company_reports(cls):
+        query = "SELECT * FROM reports LEFT JOIN companies ON companies.id = reports.company_id;"
+        result = connectToMySQL('services_reports').query_db(query)
+
+        all_company_reports = []
+
+        for report_each in result:
+            one_report = report.Report(report_each)
+
+            all_company_reports.append(one_report)
+
+        return all_company_reports
+    
 
     @staticmethod
     def validation_registering(data):

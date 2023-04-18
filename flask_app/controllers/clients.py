@@ -2,6 +2,7 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.client import Client
 from flask_app.models.report import Report
+from flask_app.models.company import Company
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -41,4 +42,19 @@ def client_dashboard():
 
     reports = Client.get_this_client_reports_with_company()
 
-    return render_template('client_dashboard.html', reports = reports, client = client)
+    all_companies = Company.get_all_companies()
+
+    return render_template('client_dashboard.html', reports = reports, client = client, all_companies = all_companies)
+
+@app.route('/client_make_report_controller', methods=['POST'])
+def client_make_report_controller():
+
+    data = {
+        'service': request.form['service'],
+        'issue': request.form['issue'],
+        'company_id': request.form['company_id'],
+        'client_id': session['user_id']
+    }
+    Report.client_make_report(data)
+    print("Hi 1")
+    return redirect('/client_dashboard')

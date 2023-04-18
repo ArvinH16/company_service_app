@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.company import Company
+from flask_app.models.report import Report
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -28,5 +29,16 @@ def create_company():
 
 @app.route('/company_dashboard')
 def company_dashboard():
-    return render_template('company_dashboard.html')
+    if 'user_id' not in session:
+        return redirect('/')
+    
+    data = {
+        'id' : session['user_id']
+    }
+
+    company = Company.get_company(data)
+
+    all_company_reports = Report.get_all_company_reports()
+
+    return render_template('company_dashboard.html', all_company_reports = all_company_reports, company = company)
 

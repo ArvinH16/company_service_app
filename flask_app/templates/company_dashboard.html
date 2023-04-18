@@ -5,8 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav_bar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='company_dashboard.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='reports_view.css') }}">
+
 </head>
 <body>
-    <h1>Hi company</h1>
+    <nav>
+        <!-- <div id="nav_list">
+            <h1>Service feedback</h1>
+            <p>Home</p>
+            <p>Already a member? <a href="">Sign in</a></p>
+        </div> -->
+        <h1 id="title">Service feedback</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sign_in_page">Sign in</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <h1>Hi {{company.company_name}}</h1>
+
+        <div id="reports_view">
+            <h3>Your reports:</h3>
+            {% for one_report in all_company_reports %}
+            <div id="each_row">
+                <div id="left_col">
+                    {{one_report.created_at}}
+                </div>
+
+                <div id="center_col">
+                    {{one_report.issue}}
+                </div>
+
+                <div id="right_col">
+                    {{one_report.service}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

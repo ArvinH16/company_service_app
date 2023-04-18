@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash, session
 from flask_app.models import report, company
 
 import re
@@ -56,21 +56,23 @@ class Client:
                 'updated_at': report['updated_at']
             }
             '''
-            one_report_object = report.Report(report_each)
+            if report_each['client_id'] == session['user_id']:
 
-            report_company_object = {
-                'id': report_each['companies.id'],
-                'company_name': report_each['company_name'],
-                'email': report_each['companies.email'],
-                'password': report_each['companies.password'],
-                'created_at': report_each['companies.created_at'],
-                'updated_at': report_each['companies.updated_at']
-            }
+                one_report_object = report.Report(report_each)
 
-            report_company = company.Company(report_company_object)
-            one_report_object.company = report_company
+                report_company_object = {
+                    'id': report_each['companies.id'],
+                    'company_name': report_each['company_name'],
+                    'email': report_each['companies.email'],
+                    'password': report_each['companies.password'],
+                    'created_at': report_each['companies.created_at'],
+                    'updated_at': report_each['companies.updated_at']
+                }
 
-            this_client_reports_with_company.append(one_report_object)
+                report_company = company.Company(report_company_object)
+                one_report_object.company = report_company
+
+                this_client_reports_with_company.append(one_report_object)
 
         return this_client_reports_with_company
 
