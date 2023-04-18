@@ -1,5 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from flask_app.models import report, client
+
 import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -14,19 +16,18 @@ class Company:
         self.updated_at = data['updated_at']
 
         self.reports = []
-        self.services = []
-        self.responses = []
 
     @classmethod
     def create_company(cls, data):
         query = "INSERT INTO companies(company_name, email, password) VALUES(%(company_name)s, %(email)s, %(password)s);"
-        result = connectToMySQL('services').query_db(query, data)
+        result = connectToMySQL('services_reports').query_db(query, data)
         return result
+
 
     @classmethod
     def check_email(cls, data):
         query = "SELECT * FROM companies WHERE email = %(email)s"
-        result = connectToMySQL('services').query_db(query, data)
+        result = connectToMySQL('services_reports').query_db(query, data)
         if len(result) < 1:
             return False
         
@@ -37,7 +38,7 @@ class Company:
         is_valid = True
 
         query = "SELECT * FROM companies WHERE email = %(email)s"
-        result = connectToMySQL('services').query_db(query, data)
+        result = connectToMySQL('services_reports').query_db(query, data)
         if len(result) >= 1:
             flash("This email is already in use for a different account", 'company_register')
             is_valid = False

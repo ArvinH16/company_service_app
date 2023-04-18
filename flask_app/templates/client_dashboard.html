@@ -25,11 +25,33 @@
     <div>
         <h1>Hi {{client.first_name}}</h1>
 
-        {% for one_report in reports %}
-            <div>
-                
+        <div id="make_reports_section">
+            <form action="/client_make_report" method="post">
+                <label for="company">Choose which company:</label>
+                <select name="company">
+                    <option value=""></option>
+                </select>
+            </form>
+        </div>
+
+        <div id="reports_section">
+            <h3>Your reports:</h3>
+            {% for one_report in reports %}
+            <div id="each_row">
+                <div id="left_col">
+                    {{one_report.company.company_name}}
+                </div>
+
+                <div id="center_col">
+                    {{one_report.issue}}
+                </div>
+
+                <div id="right_col">
+                    {{one_report.service}}
+                </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

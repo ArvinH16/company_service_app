@@ -24,7 +24,7 @@ def create_client():
     }
 
     clientAdded = Client.create_client(data)
-    session['user_id'] = company.id
+    session['user_id'] = clientAdded
 
     return(redirect('/'))
 
@@ -38,6 +38,7 @@ def client_dashboard():
     }
 
     client = Client.get_client(data)
-    reports = Report.get_this_client_reports()
+
+    reports = Client.get_this_client_reports_with_company()
 
     return render_template('client_dashboard.html', reports = reports, client = client)

@@ -22,6 +22,7 @@ def create_company():
     }
 
     companyAdded = Company.create_company(data)
+    session['user_id'] = companyAdded
 
     return(redirect('/'))
 

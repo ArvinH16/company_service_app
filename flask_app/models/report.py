@@ -10,19 +10,18 @@ class Report:
         self.issue = data['issue']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.service = data['service']
 
-        self.service_id = data['service_id']
-        self.company_id = data['company_id']
-
-        self.client_id = None
+        self.company = None
+        self.client = None
 
     @classmethod
-    def get_this_client_reports(cls):
+    def get_all_client_reports(cls):
         data = {
             'user_id' : session['user_id']
         }
         query = "SELECT * FROM reports WHERE reports.client_id = %(user_id)s"
-        result = connectToMySQL('services').query_db(query, data)
+        result = connectToMySQL('services_reports').query_db(query, data)
         report_objects = []
         for report in result:
             report_object = cls(report)
